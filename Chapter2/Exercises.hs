@@ -22,4 +22,3 @@ triple x = x * 3
 
 waxOff x = triple x
 
--- 6.

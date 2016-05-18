@@ -1,3 +1,5 @@
+module Exercises where
+
 -- | Reading syntax
 -- 1a. Right
 -- 1b. (++) [1,2,3] [4,5,6]

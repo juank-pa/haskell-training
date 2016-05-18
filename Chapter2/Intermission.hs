@@ -22,4 +22,35 @@ f = x + y
 -- 2. 25
 -- 3. 30
 -- 4. 6
---
+
+five = x
+  where x = 5
+
+fiveSqr = x * x
+  where x = 5
+
+fiveBySix = x * y
+  where
+    x = 5
+    y = 6
+
+threePlusThree = x + 3
+  where
+    x = 3
+    y = 1000
+
+-- 1.
+f1 = x * 3 + y
+  where x = 3
+        y = 1000
+
+-- 2.
+f2 = x * 5
+  where y = 10
+        x = 10 * 5 + y
+
+-- 3.
+f3 = z / x + y
+  where x = 7
+        y = negate x
+        z = y * 10
