@@ -5,10 +5,11 @@ alsoAwesome = ["Quake", "The Simons"]
 allAwesome = [awesome, alsoAwesome]
 
 -- 1. [a] -> Int
--- 2a. 5
--- 2b. 3
--- 2c. 2
--- 2d. 5
+-- 2.
+-- a) 5
+-- b) 3
+-- c) 2
+-- d) 5
 -- 3. The second expression won't work because length returns and Integer and the (/) operator
 --    expects two Fractional numbers.
 -- 4. 6 `div` length [1, 2, 3]

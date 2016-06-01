@@ -1,14 +1,15 @@
 module Exercises where
 
--- | Reading syntax
--- 1a. Right
--- 1b. (++) [1,2,3] [4,5,6]
--- 1c. Right
--- 1d. "hello" ++ " world"
--- 1e. "hello" !! 4
--- 1f. Right
--- 1g. take 4 "lovely"
--- 1h. Right
+-- Reading syntax
+-- 1.
+-- a) Right
+-- b) (++) [1,2,3] [4,5,6]
+-- c) Right
+-- d) "hello" ++ " world"
+-- e) "hello" !! 4
+-- f) Right
+-- g) take 4 "lovely"
+-- h) Right
 
 -- 2.
 -- a) -> d)
@@ -17,7 +18,7 @@ module Exercises where
 -- d) -> a)
 -- e) -> b)
 
--- | Building functions
+-- Building functions
 -- 1.
 -- a) "Curry is awesome" ++ "!"
 -- b) ("Curry is awesome!" !! 4):""
@@ -45,5 +46,6 @@ letterIndex x = "Curry is awesome!" !! x
 rvrs :: String -> String
 rvrs s = drop 9 s ++ " " ++ take 2 (drop 6 s) ++ " " ++ take 5 s
 
+-- 6.
 main :: IO ()
 main = print $ rvrs "Curry is awesome"
