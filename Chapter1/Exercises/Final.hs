@@ -1,18 +1,25 @@
-module Exercises where
+module Chapter1.Exercises.Final where
 
+--------------
 -- Combinators
--- 1. Yes
--- 2. No
--- 3. Yes
--- 4. Yes
--- 5. No
+--------------
+-- It is a combinator?
+-- 1. λx.xxx Yes
+-- 2. λxy.zx No
+-- 3. λxyz.xy(zx) Yes
+-- 4. λxyz.xy(zxy) Yes
+-- 5. λxy.xy(zxy) No
 
+--------------------------
 -- Normal form or diverge?
--- 1. Normal form
--- 2. Diverge
--- 3. Normal form
+--------------------------
+-- 1. λx.xxx Can be reduced to normal form
+-- 2. (λz.zz)(λy.yy) Diverges
+-- 3. (λx.xxx)z Can be reduced to normal form
 
+--------------
 -- Beta reduce
+--------------
 -- 1.
 -- (λabc.cba)zz(λwv.w)
 -- (λa.λb.λc.cba)zz(λw.λv.w)
@@ -30,14 +37,14 @@ module Exercises where
 --
 -- 3.
 -- (λy.y)(λx.xx)(λz.zq)
--- (├ λx.xx)(λz.zq)
+-- (λx.xx)(λz.zq)
 -- (λz.zq)(λz.zq)
 -- (λz.zq)q
 -- qq
 --
 -- 4.
 -- (λz.z)(λz.zz)(λz.zy)
--- (├ λz.zz)(λz.zy)
+-- (λz.zz)(λz.zy)
 -- (λz.zy)(λz.zy)
 -- (λz.zy)y
 -- yy

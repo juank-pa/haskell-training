@@ -1,7 +1,4 @@
-module Cipher
-  ( caesar
-  , unCaesar
-  ) where
+module Chapter9.Exercises.Cipher where
 
 import Data.Char
 import Data.Bool
@@ -32,20 +29,26 @@ isAsciiLetter ch = isAsciiUpper ch || isAsciiLower ch
 -- Shifts Ascii alphabet characters by and specific amount "wrapping" it to
 -- the corresponding range.
 -- Characters outside of the Acii alphabet range are not shifted.
--- Here I trust `isUpper` because isAsciiLetter has already filtered the character
+-- Here I trust `isUpper` because `base` has already filtered the character
 shiftLetter :: Int -> Char -> Char
 shiftLetter n ch
-  | isAsciiLetter ch = (intToCh base . (`mod` 26) . (+n) . chToInt base) ch
-  | otherwise        = ch
-  -- The base to subtract from, and add to, the character ordinal value
-  where base = ord . bool 'a' 'A' . isUpper $ ch
+  | b /= 0    = (intToCh b . (`mod`26) . (+n) . chToInt b) ch
+  | otherwise = ch
+  where b = base ch
 
-shiftAmount :: Int
-shiftAmount = 5
+-- The base for uppercase letter is `ord 'A'` and for lowercase letters
+-- is `ord 'a'`. For any other letter is zero.
+base :: Char -> Int
+base ch
+  | isAsciiLetter ch = ord . bool 'a' 'A' . isUpper $ ch
+  | otherwise        = 0
 
--- cipher
+-- Caesar
+fixedShift :: Int
+fixedShift = 5
+
 caesar :: String -> String
-caesar = map (shiftLetter shiftAmount)
+caesar = map (shiftLetter fixedShift)
 
 unCaesar :: String -> String
-unCaesar = map (shiftLetter (negate shiftAmount))
+unCaesar = map (shiftLetter (negate fixedShift))
