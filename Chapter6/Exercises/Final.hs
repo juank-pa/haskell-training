@@ -1,4 +1,6 @@
-module Chapter6 where
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
+module Chapter6.Exercises.Final where
 
 import Data.List (sort)
 
@@ -105,14 +107,14 @@ freud2' x = x
 myX = 1 :: Int
 
 sigmund :: Int -> Int
-sigmund x = myX
+sigmund _ = myX
 
 -- sigmund :: a -> a
 -- sigmund x = myX
 
 -- 8. Doesn't compile because `sigmund'` returns an `Int` and its type expects a `Num`
 sigmund' :: Int -> Int
-sigmund' x = myX
+sigmund' _ = myX
 
 -- sigmund' :: Num a => a -> a
 -- sigmund' x = myX
@@ -144,8 +146,8 @@ signifier xs = head (mySort xs)
 -- Type-Kwon-Do Two: Electric Typealoo
 -- 1.
 chk :: Eq b => (a -> b) -> a -> b -> Bool
-chk f x y = f x == y
+chk fn x y = fn x == y
 
 -- 2.
 arith :: Num b => (a -> b) -> Integer -> a -> b
-arith f x y = f y * fromInteger x
+arith fn x y = fn y * fromInteger x

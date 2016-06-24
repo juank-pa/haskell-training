@@ -1,4 +1,4 @@
-module Exercises where
+module Chapter7.Exercises.Final where
 
 -- Multiple choice
 -- 1. d)

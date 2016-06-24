@@ -1,4 +1,4 @@
-module Exercises where
+module Chapter9.Exercises.Final where
 
 import Data.Char
 import Data.Bool
@@ -98,12 +98,14 @@ myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
 myMaximumBy _ [x]    = x
 myMaximumBy f (x:xs) = bool mx x (f x mx == GT)
   where mx = myMaximumBy f xs
+myMaximumBy _ _      = error "Empty list"
 
 -- 9.
 myMinimumBy :: (a -> a -> Ordering) -> [a] -> a
 myMinimumBy _ [x]    = x
 myMinimumBy f (x:xs) = bool mx x (f x mx == LT)
   where mx = myMinimumBy f xs
+myMinimumBy _ _      = error "Empty list"
 
 myMaximum :: (Ord a) => [a] -> a
 myMaximum = myMaximumBy compare

@@ -1,3 +1,7 @@
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+
 module Chapter2.Exercises.Intermission where
 
 ----------------------
@@ -44,9 +48,9 @@ circleArea r = 3.14 * (r * r)
 --     y = 10
 --    f = x + y
 --    removed initial space in second line
-x = 7
-y = 10
-f = x + y
+x' = 7
+y' = 10
+f = x' + y'
 
 --------------
 -- A Head Code

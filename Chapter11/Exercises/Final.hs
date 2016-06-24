@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Chapter11.Exercises.Intermission where
+module Chapter11.Exercises.Final where
 
 import Data.Char
 

@@ -1,4 +1,4 @@
-module Exercises where
+module Chapter5.Exercises.Final where
 
 -- Mutiple choice
 -- 1. c)
@@ -66,19 +66,19 @@ c' _ y = y
 -- 5.
 -- 6.
 co :: (b -> c) -> (a -> b) -> (a -> c)
-co f g x = f (g x)
+co f' g' x = f' (g' x)
 --   or
 co' :: (b -> c) -> (a -> b) -> (a -> c)
-co' f g = f . g
+co' f' g' = f' . g'
 -- 7.
 a :: (a -> c) -> a -> a
 a _ x = x
 -- 8.
 a' :: (a -> b) -> a -> b
-a' f x = f x
+a' f' x = f' x
 -- or
 a'' :: (a -> b) -> a -> b
-a'' f = f
+a'' f' = f'
 
 -- Fix it
 -- 1. see Sing.hs
@@ -126,4 +126,4 @@ xform (x, y) = (xz x, yz y)
 
 -- 4.
 munge :: (x -> y) -> (y -> (w, z)) -> x -> w
-munge f g x = fst (g (f x))
+munge f' g' x = fst (g' (f' x))

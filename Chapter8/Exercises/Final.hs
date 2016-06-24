@@ -1,4 +1,4 @@
-module Exercises where
+module Chapter8.Exercises.Final where
 
 -- Review of types
 -- 1. d)
@@ -57,7 +57,7 @@ sum' x = x + sum' (x - 1)
 
 -- 3.
 mult :: Integral a => a -> a -> a
-mult x 0  = 0
+mult _ 0  = 0
 mult x x' = x + mult x (x' - 1)
 
 -- Fixing dividedBy
@@ -70,7 +70,7 @@ data DividedResult
 -- This acts more like quotRem (because of the subtraction algorithm)
 -- ratter than divMod which uses modulus arithmetics
 dividedBy :: Integer -> Integer -> DividedResult
-dividedBy num 0 = DividedByZero
+dividedBy _   0 = DividedByZero
 dividedBy num denom = go (abs num) (abs denom) 0
   where
     go n d count

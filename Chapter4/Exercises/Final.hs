@@ -1,21 +1,29 @@
-module Exercises where
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
+module Chapter4.Exercises.Final where
 
 awesome = ["Papuchon", "curry", ":)"]
 alsoAwesome = ["Quake", "The Simons"]
 allAwesome = [awesome, alsoAwesome]
 
--- 1. [a] -> Int
--- 2.
--- a) 5
--- b) 3
--- c) 2
--- d) 5
--- 3. The second expression won't work because length returns and Integer and the (/) operator
---    expects two Fractional numbers.
--- 4. 6 `div` length [1, 2, 3]
--- 5. Type is Bool and result is True
--- 6. Type is Bool and result is False
--- 7.
+-- 1. Type signature for length: [a] -> Int
+-- 2. Lengths for:
+-- a) length [1, 2, 3, 4, 5] -- 5
+-- b) length [(1, 2), (2, 3), (3, 4)] -- 3
+-- c) length allAwesome -- 2
+-- d) length (concat allAwesome) -- 5
+--
+-- 3. 6 / 3
+--    6 / length [1,2,3]
+--    The second expression won't work because length returns and Int and
+--    the (/) operator expects two Fractional numbers.
+-- 4. 6 `div` length [1, 2, 3] -- to fix 3.
+-- 5. 2 + 3 == 5 -- type is Bool and result is True
+-- 6. let x = 5
+--    x + 3 == 5
+--    Type is Bool and result is False
+-- 7. Which one works. If it works then reduce.
+--
 --   length allAwesome == 2
 --   length [awesome,alsoAwesome] == 2
 --   2 == 2
@@ -49,21 +57,25 @@ myAbs x = if x < 0 then -x else x
 f :: (a, b) -> (c, d) -> ((b, d), (a, c))
 f x y = ((snd x, snd y), (fst x, fst y))
 
+--------------------
 -- Correcting Syntax
+--------------------
 -- 1. Use backticks for x instead of quotes and lowercase function identifier
 
-x = (+)
+x' = (+)
 
-f' xs = w `x` 1
+f' xs = w `x'` 1
   where w = length xs
 
 -- 2. \x -> x -- Arrow instead of equal sign and lowercase x
 -- 3. \(x:xs) -> x -- Missing parenthesis
 -- 4.
 
-f'' (a, b) = a
+f'' (a, _) = a
 
+--------------------------------------
 -- Match function names to their types
+--------------------------------------
 -- 1. c)
 -- 2. b)
 -- 3. a)

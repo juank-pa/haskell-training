@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
 module Chapter2.Content.FunctionWithLet where
 
 printInc2 n = let plusTwo = n + 2

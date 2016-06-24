@@ -1,4 +1,6 @@
-module Exercises where
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
+module Chapter10.Exercises.Final where
 
 import Data.Bool
 
@@ -99,7 +101,9 @@ squishAgain = squishMap id
 -- 10.
 myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
 myMaximumBy f (x:xs) = foldl (\b a -> if f b a == GT then b else a) x xs
+myMaximumBy _ _      = error "Empty list"
 
 -- 11.
 myMinimumBy :: (a -> a -> Ordering) -> [a] -> a
 myMinimumBy f (x:xs) = foldl (\b a -> if f b a == LT then b else a) x xs
+myMinimumBy _ _      = error "Empty list"

@@ -1,3 +1,6 @@
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
 module Chapter2.Content.Common where
 
 sayHello :: String -> IO ()

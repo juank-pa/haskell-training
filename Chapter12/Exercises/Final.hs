@@ -254,5 +254,14 @@ unfold f = mayybee Leaf (\(la,b,ra) -> Node (unfold f la) b (unfold f ra)) . f
 
 -- 2.
 treeBuild :: Integer -> BinaryTree Integer
-treeBuild n = unfold (\a -> partial ((<=n) . mid) (a + 1, a,a + 1)) 0
+treeBuild n = unfold next 0
+  where
+    next x
+      | x <= n    = Just (x + 1, x, x + 1)
+      | otherwise = Nothing
+
+-- ... or if you want to use our previously implemented function `partial`.
+-- `partial` is not a standard library function though.
+treeBuild' :: Integer -> BinaryTree Integer
+treeBuild' n = unfold (\a -> partial ((<=n) . mid) (a + 1, a,a + 1)) 0
   where mid (_,x,_) = x
