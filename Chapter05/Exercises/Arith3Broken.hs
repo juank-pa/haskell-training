@@ -1,5 +1,5 @@
 -- arith3broken.hs
-module Arith3Broken where
+module Chapter05.Exercises.Arith3Broken where
 
 main :: IO ()
 main = do
