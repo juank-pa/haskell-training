@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Chapter4.Exercises.Final where
+module Chapter04.Exercises.Final where
 
 awesome = ["Papuchon", "curry", ":)"]
 alsoAwesome = ["Quake", "The Simons"]
@@ -60,23 +60,28 @@ f x y = ((snd x, snd y), (fst x, fst y))
 --------------------
 -- Correcting Syntax
 --------------------
--- 1. Use backticks for x instead of quotes and lowercase function identifier
+-- 1. x = (+)
+--    F xs = w 'x' 1
+--         where w = length xs
+--    Fix: Use backticks for x instead of quotes and lowercase function identifier
 
 x' = (+)
 
 f' xs = w `x'` 1
   where w = length xs
 
--- 2. \x -> x -- Arrow instead of equal sign and lowercase x
--- 3. \(x:xs) -> x -- Missing parenthesis
--- 4.
+-- 2. \X = x
+--    \x -> x -- Arrow instead of equal sign and lowercase x
+-- 3. \ x : xs -> x
+--    \(x:xs) -> x -- Missing parenthesis
+-- 4. f (a b) = A
 
 f'' (a, _) = a
 
 --------------------------------------
 -- Match function names to their types
 --------------------------------------
--- 1. c)
--- 2. b)
--- 3. a)
--- 4. d)
+-- 1. The type of show is c) Show a => a -> String
+-- 2. The type of (==) is b) Eq a => a -> a -> Bool
+-- 3. The type of fst is a) (a, b) -> a
+-- 4. The type of (+) is d) Num a => a -> a -> a

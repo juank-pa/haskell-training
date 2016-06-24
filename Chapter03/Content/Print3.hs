@@ -1,5 +1,5 @@
 -- print3.hs
-module Chapter3.Content.Print3 where
+module Chapter03.Content.Print3 where
 
 myGreeting :: String
 -- The above line reads as: "myGreeting has the type String"

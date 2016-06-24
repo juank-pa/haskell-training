@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
 
-module Chapter2.Exercises.Intermission where
+module Chapter02.Exercises.Intermission where
 
 ----------------------
 -- Comprehension Check

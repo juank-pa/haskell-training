@@ -1,5 +1,5 @@
 -- print2.hs
-module Chapter3.Content.Print2 where
+module Chapter03.Content.Print2 where
 
 main :: IO ()
 main = do

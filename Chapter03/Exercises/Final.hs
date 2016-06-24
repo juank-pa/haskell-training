@@ -1,4 +1,4 @@
-module Chapter3.Exercises.Final where
+module Chapter03.Exercises.Final where
 
 -----------------
 -- Reading syntax

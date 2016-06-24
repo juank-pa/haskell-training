@@ -1,5 +1,5 @@
 -- greetIfCool1.hs
-module Chapter4.Content.GreetIfCool1 where
+module Chapter04.Content.GreetIfCool1 where
 
 greetIfCool :: String -> IO ()
 greetIfCool coolness =

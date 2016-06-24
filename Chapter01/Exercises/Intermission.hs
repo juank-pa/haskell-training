@@ -1,4 +1,4 @@
-module Chapter1.Exercises.Intermission where
+module Chapter01.Exercises.Intermission where
 
 ------------------------
 -- Equivalence Exercises

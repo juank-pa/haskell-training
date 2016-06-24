@@ -1,4 +1,4 @@
-module Chapter1.Exercises.Final where
+module Chapter01.Exercises.Final where
 
 --------------
 -- Combinators

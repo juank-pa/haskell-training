@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
-module Chapter2.Content.Common where
+module Chapter02.Content.Common where
 
 sayHello :: String -> IO ()
 sayHello x = putStrLn ("Hello, " ++ x ++ "!")

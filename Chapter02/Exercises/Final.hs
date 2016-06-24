@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
-module Chapter2.Exercises.Final where
+module Chapter02.Exercises.Final where
 
 -------------------
 -- Parenthesization

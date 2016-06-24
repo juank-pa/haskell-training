@@ -1,4 +1,4 @@
-module Chapter4.Exercises.Intermission where
+module Chapter04.Exercises.Intermission where
 
 -------------
 -- Mood Swing

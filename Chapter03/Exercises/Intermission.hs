@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Chapter3.Exercises.Intermission where
+module Chapter03.Exercises.Intermission where
 
 --------
 -- Scope

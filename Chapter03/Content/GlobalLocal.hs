@@ -1,4 +1,4 @@
-module Chapter3.Content.GlobalLocal where
+module Chapter03.Content.GlobalLocal where
 
 topLevelFunction :: Integer -> Integer
 topLevelFunction x = x + woot + topLevelValue

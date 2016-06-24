@@ -1,5 +1,5 @@
 -- print3flipped.hs
-module Chapter3.Content.Print3Flipped where
+module Chapter03.Content.Print3Flipped where
 
 myGreeting :: String
 myGreeting = (++) "hello" " world!"
