@@ -1,16 +1,29 @@
-module Intermission where
+module Chapter06.Exercises.Intermission where
 
+-------------------
 -- Tuple experiment
+-------------------
 -- quotRem returns a tuple with the quotient and remainder of its parameters
 -- divMod returns a tuple with the division and modulo of its parameters
 
+-----------------
 -- Will they work
--- 1. Result: 5
--- 2. Result: LT
--- 3. Doesn't work
--- 4. Result: False
+-----------------
+-- 1. max (length [1, 2, 3]) (length [8, 9, 10, 11, 12])
+--    Result: 5
+--
+-- 2. compare (3 * 4) (3 * 5)
+--    Result: LT
+--
+-- 3. compare "Julie" True
+--    Doesn't work
+--
+-- 4. (5 + 3) > (3 + 6)
+--    Result: False
 
+---------------
 -- Eq Instances
+---------------
 -- 1.
 data TisAnInteger =
   TisAn Integer
@@ -23,7 +36,7 @@ data TwoIntegers =
   Two Integer Integer
 
 instance Eq TwoIntegers where
-  (Two x y) == (Two x' y') = (x == y) && (x' == y')
+  (Two x y) == (Two x' y') = (x == x') && (y == y')
 
 -- 3.
 data StringOrInt

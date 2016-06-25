@@ -27,6 +27,9 @@ anonymousAndManuallyNested :: Integer -> Bool -> Integer
 anonymousAndManuallyNested =
   \i -> \b -> i + (nonsense b)
 
+-- See Chapter05/Content/TypeInference1.hs
+-- See Chapter05/Content/TypeInference2.hs
+
 {-# ANN module "HLint: ignore Eta reduce" #-}
 triple :: Integer -> Integer
 triple x = tripleItYo x
