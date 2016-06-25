@@ -138,45 +138,84 @@ functionS (x, y) = y
 -----------------------------------
 -- Given a type, write the function
 -----------------------------------
+-- In this exercise, I provide different ways for implementing
+-- the same function. But all of them are equivalent so they do
+-- not count as a different version.
+-- I also provide the equivalent function in `Prelude` that matches
+-- the type signature, so you can get use to them.
 -- 1.
+-- Equivalent function: id
 i :: a -> a
 i x = x
+-- or
+i2 :: a -> a
+i2 = id
 
 -- 2.
+-- Equivalent function: const
 c :: a -> b -> a
 c x _ = x
+-- or
+c2 :: a -> b -> a
+c2 = const
 
--- 3. Yes, they are alpha equivalent
--- 4.
+-- 3. Yes, 2. and 3. are alpha equivalent
+c'' :: b -> a -> b
+c'' x _ = x
+-- or
+c2'' :: b -> a -> b
+c2'' = c2
+
+-- 4. Equivalent function: seq
 c' :: a -> b -> b
 c' _ y = y
+-- or
+c2' :: a -> b -> b
+c2' = seq
 
--- 5.
--- 6.
+-- 5. Multiple posibilites for [a] -> [a] like:
+--    filter, tail, init, cycle, reverse, etc.
+
+-- 6. Equivalent function: (.)
 co :: (b -> c) -> (a -> b) -> (a -> c)
 co f' g' x = f' (g' x)
---   or
-co' :: (b -> c) -> (a -> b) -> (a -> c)
-co' f' g' = f' . g'
+-- or
+-- (.) operator is called the composition operator
+-- and it "composes" two functions into one.
+-- We'll see composition in a later chapter.
+co2 :: (b -> c) -> (a -> b) -> (a -> c)
+co2 f' g' = f' . g'
+-- or even
+co3 :: (b -> c) -> (a -> b) -> (a -> c)
+co3 = (.)
 
 -- 7.
 a :: (a -> c) -> a -> a
 a _ x = x
+-- or
+a2 :: (a -> c) -> a -> a
+a2 = seq
 
 -- 8.
 {-# ANN module "HLint: ignore Eta reduce" #-}
 a' :: (a -> b) -> a -> b
 a' f' x = f' x
 -- or
-a'' :: (a -> b) -> a -> b
-a'' f' = f'
+-- Because of currying you can think of this function as,
+-- receiving a function `(a -> b)` and returning a function
+-- a -> b, so this is why just returning `f'` typechecks
+-- and is equivalent to `a'`
+a2' :: (a -> b) -> a -> b
+a2' f' = f'
+-- or even
+a3' :: (a -> b) -> a -> b
+a3' = ($)
 
 ---------
 -- Fix it
 ---------
--- 1. see Sing.hs
--- 2. Just chage the > operator with a <
--- 3. see Arith3Broken.hs
+-- 1., 2. See Chapter05/Exercises/Sing.hs
+-- 3. See Chapter05/Exercises/Arith3Broken.hs
 
 ----------------
 -- Type-Known-Do

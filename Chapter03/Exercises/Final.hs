@@ -76,4 +76,4 @@ letterIndex x = "Curry is awesome!" !! x
 rvrs :: String -> String
 rvrs s = drop 9 s ++ " " ++ take 2 (drop 6 s) ++ " " ++ take 5 s
 
--- 6. See Chapter3/Exercises/Reverse.hs
+-- 6. See Chapter03/Exercises/Reverse.hs
