@@ -1,5 +1,7 @@
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 -- arith4.hs
-module Arith4 where
+module Chapter07.Exercises.Arith4 where
 
 -- id :: a -> a
 -- id x = x
@@ -13,6 +15,7 @@ roundTripPF = read . show
 roundTripPF' :: (Show a, Read b) => a -> b
 roundTripPF' = read . show
 
+{-# ANN module "HLint: ignore Evaluate" #-}
 main = do
   print (roundTrip 4)
   print (roundTripPF 4)
