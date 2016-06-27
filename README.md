@@ -1,5 +1,7 @@
 # Haskell Programming from first principles: Exercises solutions
 
+**Note:** This is still a work in progress.
+
 I was studying [Haskell](https://www.haskell.org/) for a month, and then began reading the Christopher Allen and Julie Moronuki's, [Haskell Programming from first principles](http://haskellbook.com/) book. At that point I started a repository with the answers for all Intermission and Chapter exercises. At first this served only one purpose: to self-document my progress throughout the book. But later, I thought it would be good idea to share what I've learned and to create an access point to let other developers learning Haskell compare their solutions, share ideas on better ones, and learn more about Haskell in the process.
 
 To improve documentation I started adding not only the exercises, but the code samples found throughout the book. I updated my responses, to not be as plain as "1. a)" but to also answer using complete sentences, and in many cases explain the why behind it. I really wanted people to understand the exercises even if they don't have the book in front of them.
