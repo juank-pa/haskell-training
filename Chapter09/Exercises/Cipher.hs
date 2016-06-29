@@ -1,9 +1,11 @@
-module Chapter9.Exercises.Cipher where
+module Chapter09.Exercises.Cipher where
 
 import Data.Char
 import Data.Bool
 
+-------------------
 -- Helper functions
+-------------------
 
 -- For this exercise I use the `isAsciiUpper` and `isAciiLower` functions because
 -- the `isUpper` and `isLower` functions take into account all the Unicode range.
@@ -43,7 +45,9 @@ base ch
   | isAsciiLetter ch = ord . bool 'a' 'A' . isUpper $ ch
   | otherwise        = 0
 
+---------
 -- Caesar
+---------
 fixedShift :: Int
 fixedShift = 5
 

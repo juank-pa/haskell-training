@@ -1,4 +1,6 @@
-module PoemLines where
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
+module Chapter09.Exercises.PoemLines where
 
 firstSen = "Tyger Tyger, burning bright\n"
 secondSen = "In the forests of the night\n"

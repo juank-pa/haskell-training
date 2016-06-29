@@ -12,7 +12,9 @@ import Data.Char
 import Data.Bool
 import Data.List
 
+-------------------
 -- Helper functions
+-------------------
 
 -- For this exercise I use the `isAsciiUpper` and `isAciiLower` functions because
 -- the `isUpper` and `isLower` functions take into account all the Unicode range.
