@@ -88,4 +88,4 @@ foldBool3 _ y False = y
 g :: (a -> b) -> (a, c) -> (b, c)
 g f (a, c) = (f a, c)
 
--- 4. 5. 6. See Arith4.hs
+-- 4. 5. 6. See Chapter07/Exercises/Arith4.hs

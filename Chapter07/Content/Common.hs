@@ -163,3 +163,99 @@ avgGrade x
   where y = x / 100
 
 -- See Chapter07/Content/Arith2.hs
+
+blah :: Int
+blah = 10
+
+-- curry and uncurry already exist in Prelude
+
+curry' :: ((a, b) -> c) -> a -> b -> c
+curry' f a b = f (a, b)
+
+uncurry' :: (a -> b -> c) -> ((a, b) -> c)
+uncurry' f (a, b) = f a b
+
+-- uncurried function, takes a tuple of its arguments
+add :: (Int, Int) -> Int
+add (x, y) = x + y
+
+add' :: Int -> Int -> Int
+add' = curry' add
+
+data Blah = Blah
+
+blahFunc :: Blah -> Bool
+blahFunc Blah = True
+
+data Identity a
+  = Identity a
+  deriving (Eq, Show)
+
+-- when you pattern match on Identity
+-- you can unpack and expose the 'a'
+unpackIdentity :: Identity a -> a
+unpackIdentity (Identity x) = x
+
+-- But you can choose to ignore
+-- the contents of Identity
+ignoreIdentity :: Identity a -> Bool
+ignoreIdentity (Identity _) = True
+
+-- or ignore it completely since matching on
+-- a non-sum data constructor changes nothing.
+ignoreIdentity' :: Identity a -> Bool
+ignoreIdentity' _ = True
+
+data Product a b
+  = Product a b
+  deriving (Eq, Show)
+
+productUnpackOnlyA :: Product a b -> a
+productUnpackOnlyA (Product x _) = x
+
+productUnpackOnlyB :: Product a b -> b
+productUnpackOnlyB (Product _ y) = y
+
+productUnpack :: Product a b -> (a, b)
+productUnpack (Product x y) = (x, y)
+
+data SumOfThree a b c
+  = FirstPossible a
+  | SecondPossible b
+  | ThirdPossible c
+  deriving (Eq, Show)
+
+sumToInt :: SumOfThree a b c -> Integer
+sumToInt (FirstPossible _)  = 0
+sumToInt (SecondPossible _) = 1
+sumToInt (ThirdPossible _)  = 2
+
+-- We can selectively ignore inhabitants of the sum
+sumToInt' :: SumOfThree a b c -> Integer
+sumToInt' (FirstPossible _) = 0
+sumToInt' _                 = 1
+
+-- We still need to handle every possible value
+
+-- If you apply this to any values,
+-- it'll recurse indefinitely.
+{-# ANN module "HLint: ignore Eta reduce" #-}
+f' x = f' x
+
+-- It'll a'splode if you pass a False value
+dontDoThis :: Bool -> Int
+dontDoThis True = 1
+
+-- morally equivalent to
+definitelyDontDoThis :: Bool -> Int
+definitelyDontDoThis True  = 1
+definitelyDontDoThis False = error "oops"
+
+-- don't use error. We'll show you a better way soon.
+
+-- (.) can be implemented as
+comp :: (b -> c) -> ((a -> b) -> (a -> c))
+comp f g x = f (g x)
+
+-- See Chapter07/Content/NotPointFree.hs
+-- See Chapter07/Content/PointFree.hs

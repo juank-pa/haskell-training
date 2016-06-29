@@ -19,6 +19,6 @@ digits n = go n []
   where go 0 xs = xs
         go x xs = go d (m:xs) where (d,m) = divMod x 10
 
--- Used intercalate here which is the same as concat . intersperse. Recommended by HLint
+-- Used intercalate here which is the same as concat . intersperse. Recommended by hlint
 wordNumber :: Int -> String
 wordNumber = intercalate "-" . map digitToWord . digits

@@ -1,6 +1,6 @@
-module Intermission where
+module Chapter08.Exercises.Intermission where
 
--- 1.
+-- 1. Evaluate: applyTimes 5 (+1) 5
 -- Translated the (+1) section to common math notation to the right to simplify parentheses
 --
 -- applyTimes 5 (+1) 5 =
@@ -16,16 +16,3 @@ module Intermission where
 --         (applyTimes 0 (+1) 5) + 1 + 1 + 1 + 1 + 1
 --                             5 + 1 + 1 + 1 + 1 + 1
 --                             10
-
-fib :: Integral a => Int -> a
-fib = (fibs!!)
-
-fibs :: Integral a => [a]
-fibs = fst <$> iterate ((,) <$> snd <*> uncurry (+)) (0,1)
-
-fibs' :: Integral a => [a]
-fibs' = 0:1:zipWith (+) fibs (tail fibs)
-
-fibs'' :: [Integer]
-fibs'' = fibs2' 0 1
-  where fibs2' f1 f2 = f1 : fibs2' f2 (f1 + f2)
