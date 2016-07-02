@@ -4,6 +4,7 @@
 module Chapter11.Exercises.Final where
 
 import Data.Char
+import Data.Bool
 
 data Weekday
   = Monday
@@ -15,7 +16,7 @@ data Weekday
 ------------------
 -- Multiple Choice
 ------------------
--- 1. a) `Weekday` is a type with five data contructors
+-- 1. a) We can say `Weekday` is a type with five data contructors
 -- 2. The type of:
 f Friday = "Miller Time" -- is
 --    c) f :: Weekday -> String
@@ -34,6 +35,8 @@ g xs = xs !! (length xs - 1)
 -- As-patterns
 --------------
 -- 1.
+-- This not only checks the letter on the first string are contained in the second.
+-- But also if they are in the same order, even if intercalated with other letters.
 isSubsequenceOf :: (Eq a) => [a] -> [a] -> Bool
 isSubsequenceOf [] _ = True
 isSubsequenceOf _ [] = False
@@ -42,8 +45,13 @@ isSubsequenceOf l@(x:xs) (y:ys)
   | otherwise = isSubsequenceOf l  ys
 
 -- 2.
+-- You can use the definition on the next section but you would beat the
+-- purpose of the as-patterns exercise.
 capitalizeWords :: String -> [(String, String)]
-capitalizeWords = map (\w@(l:ls) -> (w,toUpper l : ls)) . words
+capitalizeWords = map capitalize . words
+  where
+    capitalize []       = ([],[])
+    capitalize w@(x:xs) = (w,toUpper x:xs)
 
 ---------------------
 -- Language exercises

@@ -231,5 +231,19 @@ convert8 Both = False
 
 -- To generate the previous code I used the function `allFnStr`.
 -- I created this function and placed it in the file `Chapter11/PrintExp.hs`
--- To use it firs load the file and write something like this:
--- putStrLn $ allFnStr "quantFlip" "Quantum" "Quantum" [Yes,No,Both] [Yes,No,Both]
+-- To use it in GHCi:
+--   - load this module and `PrintExp` module at the same time:
+--     :l Chapter11/Content/ExponentialFunctionType.hs Chapter11/PrintExp.hs
+--
+--   - import the `PrintExpr` module because only the first loaded file gets auto imported:
+--     import Chapther11.PrintExpr
+--
+--   - Write something like this:
+--     putStrLn $ allFnStr "quantFlip" "Quantum" "Quantum" [Yes,No,Both] [Yes,No,Both]
+--
+--     The first parameter is the base function name
+--     Second and third parameters determines the types used for the function declaration
+--     Fourth and fifth parameters are the list of possible values. If your types derive
+--     Enum you could use the enum functions to create the lists instead.
+--
+--     You can check the `allFnStr` function if you want to get more insight.

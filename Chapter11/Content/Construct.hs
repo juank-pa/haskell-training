@@ -51,6 +51,7 @@ data BigFarmhouse
 type BigFarmhouse'
   = Product NumCow (Product NumPig NumSheep)
 
+-- Sums
 type Name = String
 type Age = Int
 type LovesMud = Bool

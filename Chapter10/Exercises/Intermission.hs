@@ -48,6 +48,11 @@ import Data.Time
 ----------------------
 -- Database Processing
 ----------------------
+-- We can later use functions like `maximum` instead of `foldr`
+-- But the idea now is to practice on folds.
+-- I don't use `filter` either because I would need to first filter
+-- by constructor by pattern mathing and then pattern match again
+-- to map and extract data. So I filter and map in a single step.
 data DatabaseItem
   = DbString String
   | DbNumber Integer
@@ -79,9 +84,12 @@ filterDbNumber = foldr f []
     f (DbNumber i) xs = i:xs
     f _            xs = xs
 
+-- Partial for empty lists
 mostRecent :: [DatabaseItem] -> UTCTime
-mostRecent = foldr max minVal . filterDbDate
-  where minVal = UTCTime (fromGregorian 0 0 0) (secondsToDiffTime 0)
+mostRecent = go . filterDbDate
+  where
+    go (x:xs) = foldr max x xs
+    go _      = error "Empty list"
 
 sumDb :: [DatabaseItem] -> Integer
 sumDb = sum . filterDbNumber

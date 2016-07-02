@@ -1,5 +1,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE NegativeLiterals #-}
+{-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module Chapter11.Exercises.Intermission where
 
@@ -80,10 +82,12 @@ areCars = map isCar
 getManu :: Vehicle -> Manufacturer
 getManu (Car m _) = m
 
--- 4. It will throw a run-time exception
--- 5. Added a new data to the Plane constructor in the previous code
+-- 4. If `getManu` is used with `Plane`, it will throw a run-time exception
+-- 5. The previous code has already added a new size data to the Plane constructor.
 
+--------------
 -- Cardinality
+--------------
 -- 1. data PugType = PugData -- cardinality is 1
 -- 2. Airline
 --      = PapuAir
@@ -91,7 +95,7 @@ getManu (Car m _) = m
 --      | TakeYourChancesUnited -- cardinality is 3
 -- 3. `Int16` cardinality is 65536
 -- 4. The cardinality of `Int` is 18446744073709551616 (might depend on platform)
---    but the cardinality of `Integer` is infinite.
+--    The cardinality of `Integer` is infinite.
 --    `Integer` is not `Bounded` so you can't use `maxBound` and `minBound` on it.
 -- 5. The 8 in `Int8` means 8 bits.
 --    The amount of values representable with eight bits is: 2 ^ 8 = 256
@@ -101,7 +105,7 @@ getManu (Car m _) = m
 --------------
 data Example = MakeExample deriving Show
 -- 1. The type of 'MakeExample' is `Example`.
---    If you try to request the type of `Example` you get a "not in scope" error.
+--    If you request the type of `Example` you get a "not in scope" error.
 -- 2. Using :info on `Example` we can see it implements `Show`
 -- 3. `:info Example2` shows `Int -> Example2` because it now needs one argument
 --    of type `Int` to construct a value of type `Example2`.
@@ -118,23 +122,29 @@ instance TooMany Int where
   tooMany x = x > 42
 
 instance TooMany (Int, String) where
-  tooMany (x, _) = x > 42
+  tooMany (x, _) = tooMany x
 
 -- 2.
 instance TooMany (Int, Int) where
-  tooMany (x, y) = x + y > 42
+  tooMany (x, y) = tooMany (x + y)
 
--- 3. This will render unusable the TooMany (Int, Int) instance because they overlap.
-instance (Num a, TooMany a) => TooMany (a, a) where
-  tooMany (x, y) = tooMany $ x * y
+-- 3. Surrounded tuple in a newtype to prevent collisions with `(Int, Int)`
+--    Only `Tuple (Int, Int)` is valid because `Int` is the only `Num` that has
+--    an instance of `TooMany`.
+newtype Tuple a = Tuple (a, a)
+
+instance (Num a, TooMany a) => TooMany (Tuple a) where
+  tooMany (Tuple (x, y)) = tooMany (x + y)
 
 ----------------
 -- Pity the Bool
 ----------------
 -- 1. The cardinality of the following is:
--- Big Bool + Small Bool = ?
---     2    +       2    = ?
---     2    +       2    = 4
+--    Big Bool + Small Bool = ?
+--        2    +       2    = ?
+--        2    +       2    = 4
+--
+--    Remember the cardinality of a Unary is the same as the contained data cardinality.
 data BigSmall
   = Big Bool
   | Small Bool
@@ -146,7 +156,7 @@ data BigSmall
 --          256  +           2    = 258
 --
 --    When trying to create Numba with numbers out of range you get an out of range warning.
---    Numbers lower inside the range work fine.
+--    Numbers inside the range work fine.
 
 data NumberOrBool
   = Numba Int8
@@ -165,14 +175,16 @@ data Fruit
   | Blackberry
   deriving (Eq, Show, Ord)
 
+-- data JamJars
+--  = Jam Fruit Int deriving (Eq, Show)
+
+-- 1. I'm using this same module instead of creating a Jasmin one.
+-- 2. Rewritten in record syntax
 data JamJars = Jam
              { fruit :: Fruit
              , jars  :: Int
              }
              deriving (Eq, Show, Ord)
-
--- 1. I'm using this same module.
--- 2. Rewritten in record syntax above.
 -- 3. `JamJars` cardinality:
 --    Fruit * Int                  = ?
 --    4     * 18446744073709551616 = ?
@@ -185,6 +197,7 @@ row3 = Jam Blackberry 8
 row4 = Jam Plum 14
 row5 = Jam Peach 65
 row6 = Jam Plum 2
+
 allJam = [row1, row2, row3, row4, row5, row6]
 allJamCount = map jars allJam
 
@@ -197,7 +210,9 @@ maxJar :: JamJars -> JamJars -> JamJars
 maxJar j j' = bool j j' (jars j' > jars j)
 
 mostRow :: [JamJars] -> JamJars
-mostRow = foldr maxJar (Jam Peach minBound)
+mostRow (x:xs) = foldr f x xs
+  where f x' y' = bool y' x' (jars x' > jars y')
+mostRow _      = error "Empty list"
 
 -- There are other possible solutions.
 
@@ -291,9 +306,11 @@ allOperatingSystems =
 allLanguages :: [ProgrammingLanguage]
 allLanguages = [Haskell, Agda, Idris, PureScript]
 
+-- using list comprehension
 allProgrammers :: [Programmer]
 allProgrammers = [Programmer o l | o <- allOperatingSystems, l <- allLanguages]
 
+-- or using concatMap
 allProgrammers' :: [Programmer]
 allProgrammers' = concatMap (\x -> map (Programmer x) allLanguages) allOperatingSystems
 
@@ -302,7 +319,9 @@ allProgrammers' = concatMap (\x -> map (Programmer x) allLanguages) allOperating
 -----------
 -- The Quad
 -----------
-data Quad = One
+-- Determine unique inhabitants for the following types
+data Quad
+  = One
   | Two
   | Three
   | Four

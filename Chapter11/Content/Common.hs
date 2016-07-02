@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
 module Chapter11.Content.Common where
 
 ---------------------------
@@ -33,8 +35,9 @@ myDoge = DogueDeBordeaux 10
 -- This will not work because 10
 -- cannot be reconciled with the
 -- type variable being bound to String
-badDoge :: DogueDeBordeaux String
-badDoge = DogueDeBordeaux 10
+--
+-- badDoge :: DogueDeBordeaux String
+-- badDoge = DogueDeBordeaux 10
 
 data Doggies a
   = Husky a
@@ -81,41 +84,11 @@ data Example = MakeExample deriving Show
 
 data Goats = Goats Int deriving (Eq, Show)
 
-tooManyGoats' :: Int -> Bool
-tooManyGoats' n = n > 42
-
-newtype Goats
-  = Goats Int deriving (Eq, Show)
-newtype Cows
-  = Cows Int deriving (Eq, Show)
-
--- Now we can rewrite our type to be
--- safer, pattern matching in order
--- to access the Int inside our data
--- constructor Goats.
-tooManyGoats :: Goats -> Bool
-tooManyGoats (Goats n) = n > 42
-
-class TooMany a where
-  tooMany :: a -> Bool
-
-instance TooMany Int where
-  tooMany n = n > 42
-
-instance TooMany Goats where
-  tooMany (Goats n) = n > 43
-
-instance TooMany Goats where
-  tooMany (Goats n) = tooMany n
-
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
-class TooMany a where tooMany :: a -> Bool
-
-instance TooMany Int where
-  tooMany n = n > 42
-
-newtype Goats = Goats Int deriving (Eq, Show, TooMany)
+-- See Chapter11/Content/Goats1.hs
+-- See Chapter11/Content/Goats2.hs
+-- See Chapter11/Content/Goats3.hs
+-- See Chapter11/Content/Goats4.hs
+-- See Chapter11/Content/Goats5.hs
 
 -- Product types
 data QuantumBool = QuantumTrue
@@ -126,12 +99,27 @@ data TwoQs
   = MkTwoQs QuantumBool QuantumBool
   deriving (Eq, Show)
 
-type TwoQs = (QuantumBool, QuantumBool)
+type TwoQsTuple = (QuantumBool, QuantumBool)
 
-data Person = MkPerson String Int deriving (Eq, Show)
+-- See Chapter11/Content/Person.hs
+-- See Chapter11/Content/PersonRecord.hs
 
+-- See Chapter11/Content/SumOfProducts.hs
+-- See Chapter11/Content/ProductOfSums.hs
+-- See Chapter11/Content/StricterSumOfProducts.hs
+
+-- See Chapter11/Content/Construct.hs
+-- See Chapter11/Content/Deconstruct.hs
+
+-- See Chapter11/Content/ExponentialFunctionType.hs
 
 -----------------------------
 -- Higher kinded data types
 -----------------------------
 data Silly a b c d = MkSilly a b c d deriving Show
+
+data Product a b
+  = a :&: b
+  deriving (Eq, Show)
+
+-- See Chapter11/Content/BinaryTree.hs
