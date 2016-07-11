@@ -57,7 +57,7 @@ base ch
 ---------
 -- This functions receive the amount to shift as first parameters
 caesar :: Int -> String -> String
-caesar n = map (shiftLetter n)
+caesar = map . shiftLetter
 
 unCaesar :: Int -> String -> String
 unCaesar = caesar . negate
