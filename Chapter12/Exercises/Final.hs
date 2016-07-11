@@ -14,6 +14,12 @@ import Data.List
 -- String processing
 --------------------
 --1.
+-- >>> notThe "the"
+-- Nothing
+-- >>> notThe "blahtheblah"
+-- Just "blahtheblah"
+-- >>> notThe "woot"
+-- Just "woot"
 notThe :: String -> Maybe String
 notThe "the" = Nothing
 notThe s     = Just s
@@ -22,6 +28,9 @@ notThe s     = Just s
 -- otherwise returns a default value.
 -- In this exercise you get the opportunity to create your own `fromMaybe`
 -- function so I'm not importing `Data.Maybe`
+
+-- >>> replaceThe "the cow loves us"
+-- "a cow loves us"
 replaceThe :: String -> String
 replaceThe = unwords . map (fromMaybe "a" . notThe) . words
 
@@ -45,6 +54,10 @@ replaceThe'' = unwords . go . map notThe . words
 isVowel :: Char -> Bool
 isVowel = (`elem` vowels) . toLower
 
+-- >>> countTheBeforeVowel "the cow"
+-- 0
+-- >>> countTheBeforeVowel "the evil cow"
+-- 1
 countTheBeforeVowel :: String -> Integer
 countTheBeforeVowel = go . map notThe . words
   where
@@ -54,6 +67,10 @@ countTheBeforeVowel = go . map notThe . words
     go (_:xs)      = go xs
 
 -- 3.
+-- >>> countVowels "the cow"
+-- 2
+-- >>> countVowels "Mikolajczak"
+-- 4
 countVowels :: String -> Integer
 countVowels = toInteger . length . filter isVowel
 
@@ -93,10 +110,24 @@ data Nat
   | Succ Nat
   deriving (Eq, Show)
 
+-- >>> natToInteger Zero
+-- 0
+-- >>> natToInteger (Succ Zero)
+-- 1
+-- >>> natToInteger (Succ (Succ Zero))
+-- 2
 natToInteger :: Nat -> Integer
 natToInteger Zero     = 0
 natToInteger (Succ n) = 1 + natToInteger n
 
+-- >>> integerToNat 0
+-- Just Zero
+-- >>> integerToNat 1
+-- Just (Succ Zero)
+-- >>> integerToNat 2
+-- Just (Succ (Succ Zero))
+-- >>> integerToNat (-1)
+-- Nothing
 integerToNat :: Integer -> Maybe Nat
 integerToNat n
   | n < 0     = Nothing
@@ -109,27 +140,51 @@ integerToNat n
 -- Small library for Maybe
 --------------------------
 -- 1.
+-- >>> isJust (Just 1)
+-- True
+-- >>> isJust Nothing
+-- False
 isJust :: Maybe a -> Bool
 isJust (Just _) = True
 isJust _        = False
 
+-- >>> isNothing (Just 1)
+-- False
+-- >>> isNothing Nothing
+-- True
 isNothing :: Maybe a -> Bool
 isNothing = not . isJust
 
 -- 2.
+-- >>> mayybee 0 (+1) Nothing
+-- 0
+-- >>> mayybee 0 (+1) (Just 1)
+-- 2
 mayybee :: b -> (a -> b) -> Maybe a -> b
 mayybee _ f (Just x) = f x
 mayybee y _ _        = y
 
 -- 3.
+-- >>> fromMaybe 0 Nothing
+-- 0
+-- >>> fromMaybe 0 (Just 1)
+-- 1
 fromMaybe :: a -> Maybe a -> a
 fromMaybe = flip mayybee id
 
 -- 4.
+-- >>> listToMaybe [1, 2, 3]
+-- Just 1
+-- >>> listToMaybe []
+-- Nothing
 listToMaybe :: [a] -> Maybe a
 listToMaybe []    = Nothing
 listToMaybe (x:_) = Just x
 
+-- >>> maybeToList (Just 1)
+-- [1]
+-- >>> maybeToList Nothing
+-- []
 maybeToList :: Maybe a -> [a]
 maybeToList = mayybee [] (:[])
 
@@ -151,10 +206,18 @@ catMaybes' = map fromJust . filter isJust
 mapMaybe :: (a -> Maybe b) -> [a] -> [b]
 mapMaybe f = foldr (\x xs -> mayybee xs (:xs) (f x)) []
 
+-- >>> catMaybes [Just 1, Nothing, Just 2]
+-- [1, 2]
+-- >>> catMaybes [Nothing, Nothing, Nothing]
+-- []
 catMaybes :: [Maybe a] -> [a]
 catMaybes = mapMaybe id
 
 -- 6.
+-- >>> flipMaybe [Just 1, Just 2, Just 3]
+-- Just [1, 2, 3]
+-- >>> flipMaybe [Just 1, Nothing, Just 3]
+-- Nothing
 flipMaybe :: [Maybe a] -> Maybe [a]
 flipMaybe []          = Just []
 flipMaybe (Nothing:_) = Nothing

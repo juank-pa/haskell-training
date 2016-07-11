@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 
-module Chapter11.Exercises.Cipher
+module Cipher
   ( caesar
   , unCaesar
   , vigenere

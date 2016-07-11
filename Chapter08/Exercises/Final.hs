@@ -74,7 +74,7 @@ sum' 0 = 0
 sum' x = x + sum' (x - 1)
 
 -- 3. Write a recursive mult function
-mult :: Integral a => a -> a -> a
+mult :: (Num a, Eq a) => a -> a -> a
 mult _ 0  = 0
 mult x y = x + mult x (y - 1)
 

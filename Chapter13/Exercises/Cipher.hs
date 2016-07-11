@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 
 module Chapter13.Exercises.Cipher
   ( caesar
@@ -6,6 +5,9 @@ module Chapter13.Exercises.Cipher
   , vigenere
   , unVigenere
   , vigenere'
+  , unVigenere'
+  , encodeCaesar
+  , encodeVigenere
   ) where
 
 import Data.Char
@@ -15,6 +17,13 @@ import Data.List
 -------------------
 -- Helper functions
 -------------------
+
+-- General Notes:
+-- I have found simpler implementations on the Internet but they lack
+-- the Unicode characters management, space management, output space and punctuation
+-- recovery, or letter case management.
+-- If you are not worried about this implementation details, solutions can
+-- be rather simple.
 
 -- For this exercise I use the `isAsciiUpper` and `isAciiLower` functions because
 -- the `isUpper` and `isLower` functions take into account all the Unicode range.
@@ -57,32 +66,27 @@ base ch
 ---------
 -- Caesar
 ---------
-fixedShift :: Int
-fixedShift = 5
+-- This functions receive the amount to shift as first parameters
+caesar :: Int -> String -> String
+caesar n = map (shiftLetter n)
 
-caesar :: String -> String
-caesar = map (shiftLetter fixedShift)
-
-unCaesar :: String -> String
-unCaesar = map (shiftLetter (negate fixedShift))
+unCaesar :: Int -> String -> String
+unCaesar n = caesar (negate n)
 
 -----------
 -- Vigenère
 -----------
+-- Note: The exercise is not clear whether or not punctuation characters should
+-- also be ignored when consuming the keyword.
+-- The solutions does not count spaces to consume keyword letters, to respect the
+-- exercise sample output.
 --
--- I have found simpler implementations on the Internet but they lack
--- the Unicode characters management, space management, output space and punctuation
--- recovery, or letter case management.
--- If you are not worried about this implementation details the solution can
--- be rather simple.
-
 -- This function converts a keyword into a list of shift offset values
 shiftList :: String -> [Int]
-shiftList str = cycle . map (\ch -> chToInt (base ch) ch) $ str
+shiftList s =
+  bool (cycle . map (\ch -> chToInt (base ch) ch) $ s) [] (null s)
 
 -- This is a more wholemeal solution.
--- This solution does not count spaces to consume keyword letters as the
--- exercise sample output shows.
 
 -- Helper function:
 -- The solution uses mainly a foldl' to have an accumulator to keep track
@@ -101,23 +105,35 @@ vigenere = vigHelper id
 unVigenere :: String -> String -> String
 unVigenere = vigHelper negate
 
--- This is a recursive solution.
--- The exercise is not clear whether or not punctuation characters should
--- also be ignored when consuming the keyword.
-vigenere' :: String -> String -> String
-vigenere' "" str = str
-vigenere' kw str = go (shiftList kw) str
+-- Here I tried a recursive solution instead.
+-- The previous solution uses `words` and `unwords` which causes contiguous
+-- spaces to be lost on `vigenere kw . unVigenere kw` roundtrips. The following
+-- version doesn't suffer from that side-effect.
+
+vigHelper' :: (Int -> Int) -> String -> String -> String
+vigHelper' f kw = go (shiftList kw)
   where
+    go [] xs = xs
     go _  "" = ""
     go ws@(s:ss) (x:xs)
-      | x /= ' '  = shiftLetter s x : go ss xs
+      | x /= ' '  = shiftLetter (f s) x : go ss xs
       | otherwise = x : go ws xs
+
+vigenere' :: String -> String -> String
+vigenere' = vigHelper' id
+
+unVigenere' :: String -> String -> String
+unVigenere' = vigHelper' negate
+
+-------------------------------------
+-- IO versions for command line tools
+-------------------------------------
 
 encodeCaesar :: IO ()
 encodeCaesar = do
   putStrLn "Enter a line to encode with Caesar: "
   str <- getLine
-  putStrLn ("Encoded: " ++ caesar str)
+  putStrLn ("Encoded: " ++ caesar 5 str)
 
 encodeVigenere :: IO ()
 encodeVigenere = do

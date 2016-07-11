@@ -7,6 +7,13 @@ import Data.Bool
 -- Helper functions
 -------------------
 
+-- General Notes:
+-- I have found simpler implementations on the Internet but they lack
+-- the Unicode characters management, space management, output space and punctuation
+-- recovery, or letter case management.
+-- If you are not worried about this implementation details, solutions can
+-- be rather simple.
+
 -- For this exercise I use the `isAsciiUpper` and `isAciiLower` functions because
 -- the `isUpper` and `isLower` functions take into account all the Unicode range.
 -- If a character with a code outside the Ascii range gets "wrapped" between the
@@ -48,11 +55,9 @@ base ch
 ---------
 -- Caesar
 ---------
-fixedShift :: Int
-fixedShift = 5
+-- This functions receive the amount to shift as first parameters
+caesar :: Int -> String -> String
+caesar n = map (shiftLetter n)
 
-caesar :: String -> String
-caesar = map (shiftLetter fixedShift)
-
-unCaesar :: String -> String
-unCaesar = map (shiftLetter (negate fixedShift))
+unCaesar :: Int -> String -> String
+unCaesar = caesar . negate

@@ -1,4 +1,4 @@
-module Chapter08.Exercises.WordNumber where
+module WordNumber where
 
 import Data.List (intercalate)
 

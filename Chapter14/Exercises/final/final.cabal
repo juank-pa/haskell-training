@@ -1,0 +1,20 @@
+name:                final
+version:             0.1.0.0
+license-file:        LICENSE
+author:              Juan Carlos Pazmino
+maintainer:          juankpro@outlook.com
+copyright:           2016 Juan Carlos Pazmino
+category:            Text
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      .
+  exposed-modules:     FinalTests
+                     , Cipher
+                     , CipherTests
+  ghc-options:         -Wall -fwarn-tabs -fno-warn-missing-signatures -fno-warn-type-defaults
+  build-depends:       base >= 4.7 && < 5
+                     , hspec
+                     , QuickCheck
+  default-language:    Haskell2010

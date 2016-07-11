@@ -82,10 +82,22 @@ main = do
 -- foldTree :: (a -> b -> b) -> b -> BinaryTree a -> b
 -- but this type will not allow to handle the accumulated values comming from both
 -- tree branches, it will be able to handle just one of them.
--- Here is the updated function type
+-- Here is the updated function type.
+-- Update: continue reading below.
 foldTree :: (b -> a -> b -> b) -> b -> BinaryTree a -> b
 foldTree _ acc Leaf = acc
 foldTree f acc (Node left v right) = f (foldTree f acc left) v (foldTree f acc right)
+
+-- After reaching Chapter 14 I started looking at some function signatures from
+-- the `Data.Map` library and I came up with an idea on how to use the originally
+-- proposed function signature.
+-- foldTree :: (a -> b -> b) -> b -> BinaryTree a -> b
+-- The direct recursion method doesn't work because once we reach a leaf the
+-- call stack does not contain the other side of the tree. But if we first
+-- flatten our tree we can actually fold it as a normal list.
+-- Here it is:
+foldTree' :: (a -> b -> b) -> b -> BinaryTree a -> b
+foldTree' f acc = foldr f acc . inorder
 
 printSum :: Show a => String -> a -> String -> String
 printSum x y z = "(" ++ x ++ "+" ++ show y ++ "+" ++ z ++ ")"
